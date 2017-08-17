@@ -27,7 +27,8 @@ Dados de cada receita:
  - Foto(s)
  - Comentários (ficam aqui ?)
 
-* CHATS: Se cada chat, só com uma pessoa ou em grupo, tiver um ID, podemos guardar em cada utilizador uma lista dos IDs dos chats em que essa pessoa está.
+
+CHATS: Se cada chat, só com uma pessoa ou em grupo, tiver um ID, podemos guardar em cada utilizador uma lista dos IDs dos chats em que essa pessoa está.
 Depois no ramo Chats temos esta estrutura: 
 
 {
