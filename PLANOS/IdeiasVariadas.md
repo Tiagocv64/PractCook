@@ -14,3 +14,5 @@
  Já agora, e se fossem várias categorias para eleger? Tipo mais fancy, mais rápida, mais saborosa, mais barata, ...
  
  - Quando o projeto estiver adiantado, usar aba 'Projects' do Github para organizar tarefas feitas / por fazer e para delegar tarefas aos membros da equipa
+ 
+ - Deixar as pessoas copiar uma lista de outra pessoa
