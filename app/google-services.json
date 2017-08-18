@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "566082790244",
+    "firebase_url": "https://practcook.firebaseio.com",
+    "project_id": "practcook",
+    "storage_bucket": "practcook.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:566082790244:android:dd6a00a3c6bf5434",
+        "android_client_info": {
+          "package_name": "com.example.tcver.practcook"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "566082790244-h643t5rkf9g6jr423shvfsda151cu3rt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAvhr5YHJOIyRXnHcvbNi8ZVRVjN6Rzfuo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
