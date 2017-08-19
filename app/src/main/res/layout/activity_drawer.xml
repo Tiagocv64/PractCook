@@ -17,13 +17,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-   <!--     <android.support.design.widget.BottomNavigationView
-            android:id="@+id/navigation_bottom"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:layout_alignParentBottom="true"
-            app:menu="@menu/my_navigation_items" />-->
-
         <com.roughike.bottombar.BottomBar
             android:id="@+id/navigation_bottom"
             android:layout_width="match_parent"

@@ -8,12 +8,4 @@
     tools:context="com.example.tcver.practcook.DrawerActivity"
     tools:showIn="@layout/app_bar_drawer">
 
-    <Button
-        android:id="@+id/button_sign_out"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Sign out" />
-
-
-
 </android.support.constraint.ConstraintLayout>
