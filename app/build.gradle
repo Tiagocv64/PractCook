@@ -29,11 +29,13 @@ dependencies {
     })
     //Firebase Auth
     //Firebase Auth Facebook
+    //BottomNavigation
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.firebaseui:firebase-ui-auth:2.2.0'
     compile 'com.facebook.android:facebook-android-sdk:4.22.1'
-    compile 'com.roughike:bottom-bar:2.3.1' //BottomNavigation
+    compile 'com.roughike:bottom-bar:2.3.1'
+    compile 'com.android.support:support-v4:25.3.1'
     testCompile 'junit:junit:4.12'
 }
 

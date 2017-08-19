@@ -7,6 +7,8 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -53,19 +55,37 @@ public class DrawerActivity extends AppCompatActivity
                         switch (tabId) {
                             case R.id.nav_home:
                                 getSupportActionBar().setTitle("Home");
+                                goFragmentHome();
                                 break;
                             case R.id.nav_search:
                                 getSupportActionBar().setTitle("Search");
+                                goFragmentSearch();
                                 break;
                             case R.id.nav_library:
                                 getSupportActionBar().setTitle("Library");
+                                goFragmentLibrary();
                                 break;
                             case R.id.nav_messages:
                                 getSupportActionBar().setTitle("Messages");
+                                goFragmentMessages();
                                 break;
                         }
                     }
                 });
+
+        if (findViewById(R.id.fragment_container) != null) {
+
+            if (savedInstanceState != null) {
+                return;
+            }
+
+            HomeFragment firstFragment = new HomeFragment();
+
+            firstFragment.setArguments(getIntent().getExtras());
+
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.fragment_container, firstFragment).commit();
+        }
 
     }
 
@@ -112,5 +132,36 @@ public class DrawerActivity extends AppCompatActivity
         return true;
     }
 
+    private void goFragmentHome(){
+        HomeFragment newFragment = new HomeFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, newFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+    private void goFragmentSearch(){
+        SearchFragment newFragment = new SearchFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, newFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+    private void goFragmentLibrary(){
+        LibraryFragment newFragment = new LibraryFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, newFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+    private void goFragmentMessages(){
+        MessagesFragment newFragment = new MessagesFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, newFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
 
 }
