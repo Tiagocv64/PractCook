@@ -4,12 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.tcver.practcook.MainActivity">
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.tcver.practcook.DrawerActivity"
+    tools:showIn="@layout/app_bar_drawer">
 
     <Button
         android:id="@+id/button_sign_out"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Sign out" />
+
+
 
 </android.support.constraint.ConstraintLayout>

@@ -25,7 +25,7 @@ public class LoginActivity extends AppCompatActivity {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         if (auth.getCurrentUser() != null) {
             // already signed in
-            Intent intentMain = new Intent(this, MainActivity.class);
+            Intent intentMain = new Intent(this, DrawerActivity.class);
             startActivity(intentMain);
             finish();
         } else {
@@ -52,7 +52,7 @@ public class LoginActivity extends AppCompatActivity {
 
             // Successfully signed in
             if (resultCode == ResultCodes.OK) {
-                Intent intentMain = new Intent(this, MainActivity.class);
+                Intent intentMain = new Intent(this, DrawerActivity.class);
                 startActivity(intentMain);
                 finish();
                 return;
