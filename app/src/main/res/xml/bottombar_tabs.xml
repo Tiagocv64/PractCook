@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tabs>
+    <tab
+        id="@+id/nav_home"
+        icon="@drawable/ic_home_black_24dp"
+        title="Home" />
+    <tab
+        id="@+id/nav_search"
+        icon="@drawable/ic_search_black_24dp"
+        title="Search" />
+    <tab
+        id="@+id/nav_library"
+        icon="@drawable/ic_library_books_black_24dp"
+        title="Library"  />
+    <tab
+        id="@+id/nav_messages"
+        icon="@drawable/ic_message_black_24dp"
+        title="Messages"  />
+
+</tabs>

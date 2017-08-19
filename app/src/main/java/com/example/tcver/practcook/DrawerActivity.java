@@ -2,6 +2,7 @@ package com.example.tcver.practcook;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
@@ -20,6 +21,8 @@ import android.widget.Button;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.roughike.bottombar.BottomBar;
+import com.roughike.bottombar.OnTabSelectListener;
 
 public class DrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -58,14 +61,13 @@ public class DrawerActivity extends AppCompatActivity
         final NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        final BottomNavigationView bottomNavigationView = (BottomNavigationView)
-                findViewById(R.id.navigation_bottom);
+        final BottomBar bottomBar = (BottomBar) findViewById(R.id.navigation_bottom);
 
-        bottomNavigationView.setOnNavigationItemSelectedListener(
-                new BottomNavigationView.OnNavigationItemSelectedListener() {
+        bottomBar.setOnTabSelectListener(
+                new OnTabSelectListener() {
                     @Override
-                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                        switch (item.getItemId()) {
+                    public void onTabSelected(@IdRes int tabId) {
+                        switch (tabId) {
                             case R.id.nav_home:
                                 getSupportActionBar().setTitle("Home");
                                 break;
@@ -79,18 +81,9 @@ public class DrawerActivity extends AppCompatActivity
                                 getSupportActionBar().setTitle("Messages");
                                 break;
                         }
-                        int size = navigationView.getMenu().size();
-                        for (int i = 0; i < size; i++) {
-                            navigationView.getMenu().getItem(i).setChecked(false);
-                        }
-                        return true;
                     }
                 });
 
-        int size = bottomNavigationView.getMenu().size();
-        for (int i = 0; i < size; i++) {
-            bottomNavigationView.getMenu().getItem(i).setChecked(false);
-        }
     }
 
     @Override

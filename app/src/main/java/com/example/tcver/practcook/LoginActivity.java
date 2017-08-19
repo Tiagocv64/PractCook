@@ -38,6 +38,7 @@ public class LoginActivity extends AppCompatActivity {
                                             new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build(),
                                             new AuthUI.IdpConfig.Builder(AuthUI.FACEBOOK_PROVIDER).build()))
                             .setLogo(R.drawable.pract_cook_image)
+                            .setTheme(R.style.MainThemeFire)
                             .build(),
                     RC_SIGN_IN);
         }
