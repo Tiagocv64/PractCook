@@ -85,6 +85,7 @@ public class DrawerActivity extends AppCompatActivity
 
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.fragment_container, firstFragment).commit();
+
         }
 
     }
