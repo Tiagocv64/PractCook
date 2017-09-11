@@ -19,10 +19,18 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 
@@ -45,6 +53,8 @@ public class DrawerActivity extends AppCompatActivity
 
         final NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        navigationView.getHeaderView(R.id.userName);
+        navigationView.getHeaderView(R.id.userEmail);
 
         final BottomBar bottomBar = (BottomBar) findViewById(R.id.navigation_bottom);
 
@@ -72,6 +82,18 @@ public class DrawerActivity extends AppCompatActivity
                         }
                     }
                 });
+
+        // Buscar a View dentro do hamburger menu
+        View hView = navigationView.getHeaderView(0);
+
+        TextView userName = (TextView) hView.findViewById(R.id.userName);
+        TextView userEmail = (TextView) hView.findViewById(R.id.userEmail);
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            userName.setText(user.getDisplayName());
+            userEmail.setText(user.getEmail());
+        }
 
         if (findViewById(R.id.fragment_container) != null) {
 
