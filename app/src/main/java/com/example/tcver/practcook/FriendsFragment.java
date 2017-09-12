@@ -8,6 +8,8 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,6 +53,27 @@ public class FriendsFragment extends Fragment {
 
                 final EditText edit_txt = (EditText) dialog.getCustomView().findViewById(R.id.friends_search_bar);
 
+                edit_txt.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                        //here is your code
+                        String queryText = edit_txt.getText().toString();
+                        getList(queryText, dialog.getCustomView());
+
+                    }
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count,
+                                                  int after) {
+                        // TODO Auto-generated method stub
+                    }
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        // TODO Auto-generated method stub
+
+                    }
+                });
+
+                /**
                 edit_txt.setOnEditorActionListener(new EditText.OnEditorActionListener() {
                     @Override
                     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -62,7 +85,7 @@ public class FriendsFragment extends Fragment {
                         }
                         return false;
                     }
-                });
+                });**/
 
                 dialog.show();
             }
