@@ -20,17 +20,17 @@
         android:id="@+id/add_friends_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/textView2"
-        android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/textView2"
         android:layout_gravity="bottom|end"
         android:layout_marginBottom="36dp"
-        android:layout_marginEnd="9dp"
-        android:layout_marginRight="9dp"
         android:clickable="true"
         android:contextClickable="false"
         android:src="@drawable/ic_add_white_24dp"
         app:backgroundTint="?attr/colorPrimary"
-        app:fabSize="normal" />
+        app:fabSize="normal"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="15dp"
+        android:layout_marginEnd="15dp" />
 
 </RelativeLayout>
