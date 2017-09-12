@@ -13,14 +13,13 @@ public class DatabaseClasses {
         private String id;
         private int level;
         private String name;
-        private String lowername;
         private Object receitas;
 
         public User() {
         }
 
         // Isto é assim simplesmente porque tem que ser. Copia
-        public User(String bio, String email, String foto, Object friends, String id, int level, String name, String lowername, Object receitas) {
+        public User(String bio, String email, String foto, Object friends, String id, int level, String name, Object receitas) {
             this.bio = bio;
             this.email = email;
             this.foto = foto;
@@ -28,7 +27,6 @@ public class DatabaseClasses {
             this.id = id;
             this.level = level;
             this.name = name;
-            this.lowername = lowername;
             this.receitas = receitas;
 
         }
@@ -59,10 +57,6 @@ public class DatabaseClasses {
 
         public String getName() {
             return name;
-        }
-
-        public String getLowername() {
-            return lowername;
         }
 
         public Object getReceitas() {

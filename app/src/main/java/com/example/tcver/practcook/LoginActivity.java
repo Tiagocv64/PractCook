@@ -101,7 +101,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 else {
                     Log.d("DEBUG", "NEW USER!");
-                    DatabaseClasses.User newUser = new DatabaseClasses.User("", user.getEmail(), "", null, uID, 0, user.getDisplayName(), user.getDisplayName().toLowerCase(), null);
+                    DatabaseClasses.User newUser = new DatabaseClasses.User("", user.getEmail(), "", null, uID, 0, user.getDisplayName(), null);
                     rootRef.child(uID).setValue(newUser);
                     Intent intentMain = new Intent(LoginActivity.this, DrawerActivity.class);
                     startActivity(intentMain);
