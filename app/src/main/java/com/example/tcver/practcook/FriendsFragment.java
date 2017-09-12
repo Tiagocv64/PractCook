@@ -57,7 +57,7 @@ public class FriendsFragment extends Fragment {
                     @Override
                     public void onTextChanged(CharSequence s, int start, int before, int count) {
                         //here is your code
-                        String queryText = edit_txt.getText().toString();
+                        String queryText = edit_txt.getText().toString().toLowerCase();
                         getList(queryText, dialog.getCustomView());
 
                     }
@@ -98,7 +98,7 @@ public class FriendsFragment extends Fragment {
     public void getList(String queryText, View dialog) {
 
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Users");
-        Query query = databaseReference.orderByChild("name")
+        Query query = databaseReference.orderByChild("lowername")
                 .startAt(queryText)
                 .endAt(queryText + "\uf8ff");
 
