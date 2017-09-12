@@ -64,20 +64,16 @@ public class DrawerActivity extends AppCompatActivity
                     public void onTabSelected(@IdRes int tabId) {
                         switch (tabId) {
                             case R.id.nav_home:
-                                getSupportActionBar().setTitle("Home");
-                                goFragmentHome();
+                                goFragment("Home");
                                 break;
                             case R.id.nav_search:
-                                getSupportActionBar().setTitle("Search");
-                                goFragmentSearch();
+                                goFragment("Search");
                                 break;
                             case R.id.nav_library:
-                                getSupportActionBar().setTitle("Library");
-                                goFragmentLibrary();
+                                goFragment("Library");
                                 break;
                             case R.id.nav_messages:
-                                getSupportActionBar().setTitle("Messages");
-                                goFragmentMessages();
+                                goFragment("Messages");
                                 break;
                         }
                     }
@@ -129,14 +125,17 @@ public class DrawerActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+        final BottomBar bottomBar = (BottomBar) findViewById(R.id.navigation_bottom);
+        bottomBar.setVisibility(View.INVISIBLE);
+
         if (id == R.id.profile) {
-            getSupportActionBar().setTitle("Profile");
+            goFragment("Profile");
         } else if (id == R.id.friends) {
-            getSupportActionBar().setTitle("Friends");
+            goFragment("Friends");
         } else if (id == R.id.settings) {
-            getSupportActionBar().setTitle("Settings");
+            goFragment("Settings");
         } else if (id == R.id.support) {
-            getSupportActionBar().setTitle("Support");
+            goFragment("Support");
         } else if (id == R.id.sign_out) {
             AuthUI.getInstance()
                     .signOut(DrawerActivity.this)
@@ -150,41 +149,59 @@ public class DrawerActivity extends AppCompatActivity
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         drawer.closeDrawer(GravityCompat.START);
 
         return true;
     }
 
-    private void goFragmentHome(){
-        HomeFragment newFragment = new HomeFragment();
+    private void goFragment(String fragmentName){
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment_container, newFragment);
+
+        switch (fragmentName) {
+            case "Home":
+                HomeFragment newFragment = new HomeFragment();
+                transaction.replace(R.id.fragment_container, newFragment);
+                break;
+
+            case "Search":
+                // tive que mudar o nome do fragment pq dava erro...
+                SearchFragment newFragment2 = new SearchFragment();
+                transaction.replace(R.id.fragment_container, newFragment2);
+                break;
+
+            case "Library":
+                LibraryFragment newFragment3 = new LibraryFragment();
+                transaction.replace(R.id.fragment_container, newFragment3);
+                break;
+
+            case "Messages":
+                MessagesFragment newFragment4 = new MessagesFragment();
+                transaction.replace(R.id.fragment_container, newFragment4);
+                break;
+
+            case "Profile":
+                ProfileFragment newFragment5 = new ProfileFragment();
+                transaction.replace(R.id.fragment_container, newFragment5);
+                break;
+
+            case "Friends":
+                FriendsFragment newFragment6 = new FriendsFragment();
+                transaction.replace(R.id.fragment_container, newFragment6);
+                break;
+
+            case "Settings":
+                SettingsFragment newFragment7 = new SettingsFragment();
+                transaction.replace(R.id.fragment_container, newFragment7);
+                break;
+
+            case "Support":
+                SupportFragment newFragment8 = new SupportFragment();
+                transaction.replace(R.id.fragment_container, newFragment8);
+                break;
+        }
+
         transaction.addToBackStack(null);
         transaction.commit();
     }
-
-    private void goFragmentSearch(){
-        SearchFragment newFragment = new SearchFragment();
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment_container, newFragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
-    }
-
-    private void goFragmentLibrary(){
-        LibraryFragment newFragment = new LibraryFragment();
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment_container, newFragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
-    }
-
-    private void goFragmentMessages(){
-        MessagesFragment newFragment = new MessagesFragment();
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment_container, newFragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
-    }
-
 }

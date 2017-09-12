@@ -35,6 +35,7 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_drawer"
+        app:itemBackground="?android:attr/windowBackground"
         app:menu="@menu/activity_drawer_drawer" />
 
 

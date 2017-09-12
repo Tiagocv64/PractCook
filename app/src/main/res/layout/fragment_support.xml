@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.tcver.practcook.MessagesFragment">
+    tools:context="com.example.tcver.practcook.SupportFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
@@ -22,7 +22,7 @@
         android:layout_gravity="center"
         android:layout_marginBottom="30dp"
         android:gravity="center_horizontal"
-        android:text="Messages"
+        android:text="Support"
         android:textSize="32sp"
         android:textStyle="bold" />
 
