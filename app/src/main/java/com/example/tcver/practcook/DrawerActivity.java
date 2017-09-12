@@ -125,6 +125,7 @@ public class DrawerActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+        // Tornar a BottomBar invisível se algum item da barra da esquerda for selecionado
         final BottomBar bottomBar = (BottomBar) findViewById(R.id.navigation_bottom);
         bottomBar.setVisibility(View.INVISIBLE);
 
@@ -158,6 +159,7 @@ public class DrawerActivity extends AppCompatActivity
     private void goFragment(String fragmentName){
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
+        // Para aumentar a eficácia das chamadas de fragmentos
         switch (fragmentName) {
             case "Home":
                 HomeFragment newFragment = new HomeFragment();

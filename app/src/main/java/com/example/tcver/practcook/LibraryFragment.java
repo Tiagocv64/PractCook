@@ -22,10 +22,12 @@ public class LibraryFragment extends Fragment {
 
         ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Library");
 
+        // Tornar BottomBar visivel e selecionar o item certo
         final BottomBar bottomBar = (BottomBar) rootView.findViewById(R.id.navigation_bottom);
         bottomBar.setVisibility(View.VISIBLE);
         bottomBar.selectTabAtPosition(2);
 
+        // Deselecionar todos os items da barra da esquerda
         NavigationView nav_view = (NavigationView) rootView.findViewById(R.id.nav_view);
         int size = nav_view.getMenu().size();
         for (int i = 0; i < size; i++) {

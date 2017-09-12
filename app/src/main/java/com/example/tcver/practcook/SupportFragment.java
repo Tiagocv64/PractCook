@@ -19,6 +19,7 @@ public class SupportFragment extends Fragment {
 
         View rootView = getActivity().getWindow().getDecorView().findViewById(android.R.id.content);
 
+        // Selecionar o item correto na barra da esquerda
         NavigationView nav_view = (NavigationView) rootView.findViewById(R.id.nav_view);
         nav_view.getMenu().getItem(3).setChecked(true);
 
