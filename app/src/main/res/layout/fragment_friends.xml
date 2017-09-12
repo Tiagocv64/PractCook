@@ -1,29 +1,36 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.example.tcver.practcook.FriendsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:elevation="1dp"
-        android:gravity="center_horizontal"
-        android:text="Fragment"
-        android:textSize="18sp"
-        android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginBottom="30dp"
-        android:gravity="center_horizontal"
-        android:text="Friends"
-        android:textSize="32sp"
-        android:textStyle="bold" />
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:text="Parece que ainda não adicionaste nenhum amigo...\nClica no botão de adicionar para começar!"
+        android:textSize="16sp" />
 
-</FrameLayout>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/add_friends_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/textView2"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/textView2"
+        android:layout_gravity="bottom|end"
+        android:layout_marginBottom="36dp"
+        android:layout_marginEnd="9dp"
+        android:layout_marginRight="9dp"
+        android:clickable="true"
+        android:contextClickable="false"
+        android:src="@drawable/ic_add_white_24dp"
+        app:backgroundTint="?attr/colorPrimary"
+        app:fabSize="normal" />
+
+</RelativeLayout>
