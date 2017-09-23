@@ -3,16 +3,33 @@ package com.example.tcver.practcook;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.firebase.ui.storage.images.FirebaseImageLoader;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import java.util.ArrayList;
 
 
 public class FriendsMessagesFragment extends Fragment {
+    public static final ArrayList<Friends> friendsList = new ArrayList<>();
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -31,16 +48,153 @@ public class FriendsMessagesFragment extends Fragment {
 
         // use a linear layout manager
         mLayoutManager = new LinearLayoutManager(getActivity());
+
+
+        String user = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Users").child(user).child("friends");
+
+
+        final RecyclerAdapter adapter = new RecyclerAdapter(friendsList);
+
+        mRecyclerView.setAdapter(adapter);
+
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        // specify an adapter (see also next example)
-        //mAdapter = new MyAdapter(myDataset);
-        //mRecyclerView.setAdapter(mAdapter);
+        ValueEventListener postListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
 
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
 
+                    friendsList.clear();
 
+                    if(Integer.parseInt(ds.getValue().toString()) == FriendsFragment.FRIENDS_TRUE){
+
+                        DatabaseReference infFriendsRef = FirebaseDatabase.getInstance().getReference().child("Users").child(ds.getKey());
+                        infFriendsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot snapshot) {
+                                String userName = snapshot.child("name").getValue().toString();
+                                //TODO: images for profile
+                                String userImage = snapshot.child("foto").getValue().toString();
+                                String userOnline = snapshot.child("online").getValue().toString();
+
+                                friendsList.add(new Friends( userName, userImage , userOnline));
+                                adapter.notifyDataSetChanged();
+                            }
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+                            }
+                        });
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                //Nothing
+            }
+        };
+
+        ref.addListenerForSingleValueEvent(postListener);
 
         return view;
+    }
+    public class RecyclerAdapter extends RecyclerView.Adapter<FriendsHolder> {
+        private ArrayList<Friends> mFriends;
+
+        public RecyclerAdapter(ArrayList<Friends> friends) {
+            mFriends = friends;
+        }
+
+        @Override
+        public FriendsHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            View inflatedView = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.messages_friends_recycler_view, parent, false);
+            return new FriendsHolder(inflatedView);
+        }
+
+        @Override
+        public void onBindViewHolder(FriendsHolder holder, int position) {
+
+            holder.changeInfo(position);
+        }
+
+        @Override
+        public int getItemCount() {
+            return friendsList.size();
+        }
+    }
+
+    //1
+    public static class FriendsHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        //2
+        private ImageView mFriendImage;
+        private TextView mFriendName;
+        private TextView mFriendOnline;
+        private FirebaseStorage storage = FirebaseStorage.getInstance();
+
+        //3
+        private static final String FRIENDS_KEY = "FRIEND";
+
+        //4
+        public FriendsHolder(View v) {
+            super(v);
+
+            mFriendImage = (ImageView) v.findViewById(R.id.messages_friends_foto);
+            mFriendName = (TextView) v.findViewById(R.id.messages_friends_name);
+            mFriendOnline = (TextView) v.findViewById(R.id.messages_friends_online);
+            v.setOnClickListener(this);
+        }
+
+        public void changeInfo(int position){
+            //TODO: get image from DB
+            mFriendName.setText(FriendsMessagesFragment.friendsList.get(position).name);
+            long timeMillis = Long.parseLong(friendsList.get(position).online);
+            long difference = System.currentTimeMillis() - timeMillis;
+            String text = "Last Online: ";
+            if (difference < 0L){
+                text += "0 seconds ago";
+            } else if (difference < 60000L){
+                text += difference/1000 + " seconds ago";
+            } else if (difference < 3600000L){
+                text += difference/60000 + " minutes ago";
+            } else if (difference < 86400000L){
+                text += difference/3600000 + " hours ago";
+            } else if (difference < 31557600000L){
+                text += difference/86400000L + " days ago";
+            } else {
+                text += difference/31557600000L + " years ago";
+            }
+            mFriendOnline.setText(text);
+
+            if (!friendsList.get(position).photo.equals("")) {
+                StorageReference httpsReference = storage.getReferenceFromUrl(friendsList.get(position).photo);
+                Glide.with(mFriendImage.getContext())
+                        .using(new FirebaseImageLoader())
+                        .load(httpsReference)
+                        .into(mFriendImage);
+            }
+        }
+
+        //5
+        @Override
+        public void onClick(View v) {
+            Log.d("RecyclerView", "CLICK!");
+        }
+    }
+
+    public class Friends{
+        private String name;
+        private String photo;
+        private String online;
+
+        public Friends(String name1, String photo1, String online1){
+            name = name1;
+            photo = photo1;
+            online = online1;
+        }
+
     }
 
 }

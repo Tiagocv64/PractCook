@@ -2,6 +2,7 @@ package com.example.tcver.practcook;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -139,6 +140,8 @@ public class DrawerActivity extends AppCompatActivity
         } else if (id == R.id.support) {
             goFragment("Support");
         } else if (id == R.id.sign_out) {
+            DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("online");
+            mDatabase.setValue(System.currentTimeMillis());
             AuthUI.getInstance()
                     .signOut(DrawerActivity.this)
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -206,5 +209,25 @@ public class DrawerActivity extends AppCompatActivity
 
         transaction.addToBackStack(null);
         transaction.commit();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if( FirebaseAuth.getInstance().getCurrentUser() != null) {
+            DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("online");
+            mDatabase.setValue(System.currentTimeMillis());
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        if( FirebaseAuth.getInstance().getCurrentUser() != null) {
+            DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("online");
+            mDatabase.setValue(System.currentTimeMillis());
+        }
     }
 }

@@ -40,6 +40,10 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class FriendsFragment extends Fragment {
+    public static final int FRIENDS_TRUE = 0;
+    public static final int FRIENDS_REQUEST_RECEIVED = 1;
+    public static final int FRIENDS_REQUEST_SENT = 2;
+    public static final int FRIENDS_REJECTED = 3;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -155,8 +159,8 @@ public class FriendsFragment extends Fragment {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("Users");
 
-        myRef.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("friends").child(targetID).setValue(false);
-        myRef.child(targetID).child("friends").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(false);
+        myRef.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("friends").child(targetID).setValue(FRIENDS_REQUEST_RECEIVED);
+        myRef.child(targetID).child("friends").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(FRIENDS_REQUEST_SENT);
     }
 
     public class PeopleAdapter extends RecyclerView.Adapter<PeopleAdapter.PeopleViewHolder> {

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="72dp"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/messages_friends_foto"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:src="@drawable/ic_menu_camera" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/messages_friends_name"
+            android:textColor="@android:color/black"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center_vertical"
+            android:text="Tiago Verdade"
+            android:textSize="24sp"/>
+
+        <TextView
+            android:id="@+id/messages_friends_online"
+            android:layout_width="match_parent"
+            android:layout_height="24dp"
+            android:layout_marginBottom="8dp"
+            android:text="Last online: 11/09/2017"
+            android:gravity="center_vertical"
+            android:textSize="16sp"/>
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:src="@drawable/ic_message_black_24dp" />
+
+</LinearLayout>
