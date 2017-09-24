@@ -1,60 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="horizontal" android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_width="match_parent"
+    android:layout_height="56dp"
+    android:orientation="horizontal">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/personFoto"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_gravity="center_vertical"
+        app:srcCompat="@drawable/ic_account_circle_black_24dp" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:layout_marginTop="4dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/personName"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:gravity="bottom"
+            android:lines="1"
             android:text="Name"
-            android:textSize="20sp"
-            android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/personFoto"
-            android:layout_toEndOf="@+id/personFoto" />
-
-        <ImageView
-            android:id="@+id/personFoto"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
-            app:srcCompat="@drawable/ic_account_circle_black_24dp" />
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/personBio"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/personName"
-            android:layout_alignStart="@+id/personName"
-            android:layout_below="@+id/personName"
-            android:layout_marginTop="10dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="4dp"
+            android:layout_weight="1"
+            android:gravity="top"
+            android:textSize="14sp"
+            android:ellipsize="end"
+            android:lines="1"
             android:text="Bio" />
+
+    </LinearLayout>
+
+
+
+
+
+    <RelativeLayout
+        android:layout_width="56dp"
+        android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/personFriendStatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="TextView"
+            android:gravity="bottom"
+            android:visibility="invisible"
             android:layout_alignBaseline="@+id/search_friends_checkBox"
             android:layout_alignBottom="@+id/search_friends_checkBox"
-            android:layout_alignEnd="@+id/search_friends_checkBox"
-            android:layout_alignRight="@+id/search_friends_checkBox"
-            android:text="TextView"
-            android:visibility="invisible" />
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
         <CheckBox
             android:id="@+id/search_friends_checkBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/personBio"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_marginEnd="11dp"
+            android:layout_marginTop="12dp"
             android:layout_marginRight="11dp"
             android:visibility="invisible" />
 
     </RelativeLayout>
+
 </LinearLayout>

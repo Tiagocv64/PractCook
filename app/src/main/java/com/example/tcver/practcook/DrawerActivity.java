@@ -20,9 +20,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.firebase.ui.auth.AuthUI;
+import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,6 +35,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 
@@ -86,8 +91,31 @@ public class DrawerActivity extends AppCompatActivity
 
         TextView userName = (TextView) hView.findViewById(R.id.userName);
         TextView userEmail = (TextView) hView.findViewById(R.id.userEmail);
+        final ImageView userImage = (ImageView) hView.findViewById(R.id.userImage);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        DatabaseReference refFoto = FirebaseDatabase.getInstance().getReference().child("Users").child(user.getUid()).child("foto");
+
+        ValueEventListener postListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                FirebaseStorage storage = FirebaseStorage.getInstance();
+                StorageReference httpsReference = storage.getReferenceFromUrl(dataSnapshot.getValue().toString());
+                Glide.with(getApplicationContext())
+                        .using(new FirebaseImageLoader())
+                        .load(httpsReference)
+                        .into(userImage);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Getting Post failed, log a message
+            }
+        };
+        refFoto.addValueEventListener(postListener);
+
+
         if (user != null) {
             userName.setText(user.getDisplayName());
             userEmail.setText(user.getEmail());

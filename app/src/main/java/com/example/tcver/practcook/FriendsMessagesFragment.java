@@ -30,6 +30,7 @@ import java.util.ArrayList;
 
 public class FriendsMessagesFragment extends Fragment {
     public static final ArrayList<Friends> friendsList = new ArrayList<>();
+    public static final ArrayList<String> friendsHashList = new ArrayList<>();
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -60,44 +61,53 @@ public class FriendsMessagesFragment extends Fragment {
 
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        ValueEventListener postListener = new ValueEventListener() {
+        final ValueEventListener postListener2 = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                friendsList.clear();
 
-                    friendsList.clear();
+                for (String id : friendsHashList) {
 
-                    if(Integer.parseInt(ds.getValue().toString()) == FriendsFragment.FRIENDS_TRUE){
+                    DataSnapshot user = dataSnapshot.child(id);
 
-                        DatabaseReference infFriendsRef = FirebaseDatabase.getInstance().getReference().child("Users").child(ds.getKey());
-                        infFriendsRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot snapshot) {
-                                String userName = snapshot.child("name").getValue().toString();
-                                //TODO: images for profile
-                                String userImage = snapshot.child("foto").getValue().toString();
-                                String userOnline = snapshot.child("online").getValue().toString();
+                    friendsList.add(new Friends(user.child("name").getValue().toString(), user.child("foto").getValue().toString(), user.child("online").getValue().toString()));
 
-                                friendsList.add(new Friends( userName, userImage , userOnline));
-                                adapter.notifyDataSetChanged();
-                            }
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
-                            }
-                        });
-                    }
                 }
-            }
 
+                mRecyclerView.setAdapter(new RecyclerAdapter(friendsList));
+            }
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                //Nothing
+
+            }
+        };
+
+        final ValueEventListener postListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                friendsList.clear();
+                friendsHashList.clear();
+
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+
+                    if (Integer.parseInt(ds.getValue().toString()) == FriendsFragment.FRIENDS_TRUE) {
+                        friendsHashList.add(ds.getKey());
+                    }
+                }
+
+                DatabaseReference refUsers = FirebaseDatabase.getInstance().getReference().child("Users");
+                refUsers.addListenerForSingleValueEvent(postListener2);
+
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
             }
         };
 
         ref.addListenerForSingleValueEvent(postListener);
-
         return view;
     }
     public class RecyclerAdapter extends RecyclerView.Adapter<FriendsHolder> {

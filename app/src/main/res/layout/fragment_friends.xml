@@ -5,16 +5,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.example.tcver.practcook.FriendsFragment">
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view_friends"
+        android:scrollbars="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/text_view_no_friends"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:gravity="center"
         android:text="Parece que ainda não adicionaste nenhum amigo...\nClica no botão de adicionar para começar!"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        android:visibility="invisible"/>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/add_friends_fab"
