@@ -9,6 +9,7 @@ public class DatabaseClasses {
         private String bio;
         private String email;
         private String foto;
+        private String fotoComida;
         private Object friends;
         private String id;
         private int level;
@@ -20,7 +21,7 @@ public class DatabaseClasses {
         }
 
         // Isto é assim simplesmente porque tem que ser. Copia
-        public User(String bio, String email, String foto, Object friends, String id, int level, String name, Object receitas, long online) {
+        public User(String bio, String email, String foto, Object friends, String id, int level, String name, Object receitas, long online, String fotoComida) {
             this.bio = bio;
             this.email = email;
             this.foto = foto;
@@ -30,6 +31,7 @@ public class DatabaseClasses {
             this.name = name;
             this.receitas = receitas;
             this.online = online;
+            this.fotoComida = fotoComida;
 
         }
 
@@ -67,6 +69,10 @@ public class DatabaseClasses {
 
         public long getOnline() {
             return online;
+        }
+
+        public String getFotoComida() {
+            return fotoComida;
         }
     }
 }

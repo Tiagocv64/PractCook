@@ -1,6 +1,8 @@
 package com.example.tcver.practcook;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.IdRes;
@@ -21,9 +23,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -37,6 +43,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.mikhaellopez.circularimageview.CircularImageView;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 
@@ -91,21 +98,39 @@ public class DrawerActivity extends AppCompatActivity
 
         TextView userName = (TextView) hView.findViewById(R.id.userName);
         TextView userEmail = (TextView) hView.findViewById(R.id.userEmail);
-        final ImageView userImage = (ImageView) hView.findViewById(R.id.userImage);
+        final CircularImageView userImage = (CircularImageView) hView.findViewById(R.id.userImage);
+        final LinearLayout linearLayout = (LinearLayout) hView.findViewById(R.id.layout_image_drawer);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-        DatabaseReference refFoto = FirebaseDatabase.getInstance().getReference().child("Users").child(user.getUid()).child("foto");
+        DatabaseReference refFotos = FirebaseDatabase.getInstance().getReference().child("Users").child(user.getUid());
 
         ValueEventListener postListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 FirebaseStorage storage = FirebaseStorage.getInstance();
-                StorageReference httpsReference = storage.getReferenceFromUrl(dataSnapshot.getValue().toString());
-                Glide.with(getApplicationContext())
-                        .using(new FirebaseImageLoader())
-                        .load(httpsReference)
-                        .into(userImage);
+                if(!dataSnapshot.child("foto").getValue().toString().equals("")) {
+                    StorageReference httpsReference = storage.getReferenceFromUrl(dataSnapshot.child("foto").getValue().toString());
+                    Glide.with(getApplicationContext())
+                            .using(new FirebaseImageLoader())
+                            .load(httpsReference)
+                            .into(userImage);
+                }
+
+                if (!dataSnapshot.child("fotoComida").getValue().toString().equals("")){
+                    StorageReference httpsReference1 = storage.getReferenceFromUrl(dataSnapshot.child("fotoComida").getValue().toString());
+                    Glide.with(getApplicationContext())
+                            .using(new FirebaseImageLoader())
+                            .load(httpsReference1)
+                            .asBitmap()
+                            .into(new SimpleTarget<Bitmap>(linearLayout.getWidth(), linearLayout.getHeight()) {
+                                @Override
+                                public void onResourceReady(Bitmap bitmap, GlideAnimation anim) {
+                                    BitmapDrawable ob = new BitmapDrawable(getResources(), bitmap);
+                                    linearLayout.setBackground(ob);
+                                }
+                            });
+                }
             }
 
             @Override
@@ -113,7 +138,7 @@ public class DrawerActivity extends AppCompatActivity
                 // Getting Post failed, log a message
             }
         };
-        refFoto.addValueEventListener(postListener);
+        refFotos.addValueEventListener(postListener);
 
 
         if (user != null) {

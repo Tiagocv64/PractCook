@@ -69,6 +69,10 @@ public class FriendsFragment extends Fragment {
         View rootView = getActivity().getWindow().getDecorView().findViewById(android.R.id.content);
         final View view = inflater.inflate(R.layout.fragment_friends, container, false);
 
+        if(friendsList.isEmpty()) {
+            view.findViewById(R.id.progress_bar_friends).setVisibility(View.VISIBLE);
+        }
+
         // Selecionar o item correto na barra da esquerda
         NavigationView nav_view = (NavigationView) rootView.findViewById(R.id.nav_view);
         nav_view.getMenu().getItem(1).setChecked(true);
@@ -112,7 +116,9 @@ public class FriendsFragment extends Fragment {
 
                 if(friendsHashList.isEmpty()){
                     TextView textViewNoFriends = (TextView) view.findViewById(R.id.text_view_no_friends);
+                    view.findViewById(R.id.progress_bar_friends).setVisibility(View.GONE);
                     textViewNoFriends.setVisibility(View.VISIBLE);
+
                 }
 
 
@@ -132,6 +138,7 @@ public class FriendsFragment extends Fragment {
 
                         }
                         mRecyclerView.setAdapter(new FriendsListAdapter(friendsList));
+                        view.findViewById(R.id.progress_bar_friends).setVisibility(View.GONE);
                     }
 
                     @Override

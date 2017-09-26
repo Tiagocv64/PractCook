@@ -40,4 +40,15 @@
         android:layout_marginRight="15dp"
         android:layout_marginEnd="15dp" />
 
+
+    <ProgressBar
+        android:id="@+id/progress_bar_friends"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:visibility="gone"
+        android:indeterminate="true"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true" />
+
 </RelativeLayout>

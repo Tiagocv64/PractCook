@@ -28,6 +28,7 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    compile 'com.mikhaellopez:circularimageview:3.0.2'
     compile 'com.google.firebase:firebase-storage:11.0.4'
     compile 'com.firebaseui:firebase-ui-storage:0.6.0'
     compile 'com.android.support:appcompat-v7:25.3.1'

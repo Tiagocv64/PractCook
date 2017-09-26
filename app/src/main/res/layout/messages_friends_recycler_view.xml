@@ -1,55 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="72dp"
-    android:orientation="horizontal">
+    android:minHeight="72dp"
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/messages_friends_foto"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_gravity="center_vertical"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
         android:src="@drawable/ic_menu_camera" />
 
+    <ImageView
+        android:id="@+id/messages_friends_send_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="16dp"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="16dp"
+        android:src="@drawable/ic_message_black_24dp" />
+
     <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="fill_parent"
-        android:orientation="vertical"
-        android:layout_weight="1">
+        android:layout_width="wrap_content"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:layout_toRightOf="@id/messages_friends_foto"
+        android:layout_toEndOf="@id/messages_friends_foto"
+        android:layout_alignWithParentIfMissing="true"
+        android:layout_toLeftOf="@id/messages_friends_send_message"
+        android:layout_toStartOf="@id/messages_friends_send_message"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="16dp"
+        android:layout_marginStart="16dp"
+        android:gravity="center_vertical"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/messages_friends_name"
-            android:textColor="@android:color/black"
             android:layout_width="match_parent"
-            android:layout_height="32dp"
-            android:layout_marginTop="8dp"
-            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:layout_height="wrap_content"
             android:text="Tiago Verdade"
-            android:textSize="24sp"/>
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"/>
 
         <TextView
             android:id="@+id/messages_friends_online"
             android:layout_width="match_parent"
-            android:layout_height="24dp"
-            android:layout_marginBottom="8dp"
-            android:text="Last online: 11/09/2017"
-            android:gravity="center_vertical"
-            android:textSize="16sp"/>
+            android:maxLines="1"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:text="Last online: 11/09/2017" />
 
     </LinearLayout>
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:src="@drawable/ic_message_black_24dp" />
 
-</LinearLayout>
+
+</RelativeLayout>

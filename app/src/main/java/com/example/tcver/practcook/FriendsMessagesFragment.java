@@ -39,8 +39,11 @@ public class FriendsMessagesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = (View) inflater.inflate(R.layout.fragment_friends_messages, container, false);
+        final View view = (View) inflater.inflate(R.layout.fragment_friends_messages, container, false);
 
+        if(friendsList.isEmpty()) {
+            view.findViewById(R.id.progress_bar_messages_friends).setVisibility(View.VISIBLE);
+        }
         mRecyclerView = (RecyclerView) view.findViewById(R.id.my_recycler_view);
 
         // use this setting to improve performance if you know that changes
@@ -76,6 +79,7 @@ public class FriendsMessagesFragment extends Fragment {
                 }
 
                 mRecyclerView.setAdapter(new RecyclerAdapter(friendsList));
+                view.findViewById(R.id.progress_bar_messages_friends).setVisibility(View.GONE);;
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
